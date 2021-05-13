@@ -59,6 +59,8 @@ import java.awt.BorderLayout;
     int jogX;                 // set if jog X button pressed
     int jogY;                 // set if jog Y button pressed
 
+    int machineMotorsOffsetXmm = 0; // Distance from side of machine to center of stepper motor
+    int machineMotorsOffsetYmm = 0; // Distance from top of machine to center of stepper motor
     int machineWidth = 840;   // Width of machine in mm
     int homeX = machineWidth/2; //X Home position
     int machineHeight = 800;    //machine Height only used to draw page height
@@ -218,12 +220,13 @@ import java.awt.BorderLayout;
 
         getProperties();
 
-
-        machineWidth = Integer.parseInt(props.getProperty("machine.width"));
-        machineHeight = Integer.parseInt(props.getProperty("machine.height"));
+        machineMotorsOffsetXmm = Integer.parseInt(props.getProperty("machine.motors.offsetXmm"));
+        machineMotorsOffsetYmm = Integer.parseInt(props.getProperty("machine.motors.offsetYmm"));
+        machineWidth = Integer.parseInt(props.getProperty("machine.width")) - machineMotorsOffsetXmm * 2;
+        machineHeight = Integer.parseInt(props.getProperty("machine.height")) - machineMotorsOffsetYmm;
         homeX = machineWidth/2;
 
-        homeY = Integer.parseInt(props.getProperty("machine.homepoint.y"));
+        homeY = Integer.parseInt(props.getProperty("machine.homepoint.y")) - machineMotorsOffsetYmm;
         mmPerRev = Float.parseFloat(props.getProperty("machine.motors.mmPerRev"));
         stepsPerRev = Float.parseFloat(props.getProperty("machine.motors.stepsPerRev"));
 
