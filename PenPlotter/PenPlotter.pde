@@ -170,8 +170,8 @@ import java.awt.BorderLayout;
     int rate;
     int tick;
     
-    float paperWidth = 8.5;
-    float paperHeight = 11;
+    float paperWidth = 210;
+    float paperHeight = 297;
     public static Console console;
     Com com = new Com();
 
@@ -285,8 +285,8 @@ import java.awt.BorderLayout;
         servoUpValue = Integer.parseInt(props.getProperty("servo.upValue"));
         servoDownValue = Integer.parseInt(props.getProperty("servo.downValue"));
         
-        paperWidth = Float.parseFloat(props.getProperty("paper.width.inches"));
-        paperHeight = Float.parseFloat(props.getProperty("paper.height.inches"));
+        paperWidth = Float.parseFloat(props.getProperty("paper.width.mm"));
+        paperHeight = Float.parseFloat(props.getProperty("paper.height.mm"));
         
         updateScale();
 
@@ -295,8 +295,8 @@ import java.awt.BorderLayout;
         handles[1] = new Handle("mWidth", machineWidth, machineHeight/2, 0, 10, handles, true, false, 64);
         handles[2] = new Handle("mHeight", homeX, machineHeight, 0, 10, handles, false, true, 64);
         handles[3] = new Handle("gondola", (int)currentX, (int)currentY, 0, 10, handles, true, true, 2);
-        handles[4] = new Handle("pWidth", Math.round(homeX+(paperWidth/2)*25.4), Math.round(homeY+(paperHeight/2)*25.4f), 0, 10, handles, true, false, 64);
-        handles[5] = new Handle("pHeight", homeX, Math.round(homeY+(paperHeight)*25.4), 0, 10, handles, false, true, 64);
+        handles[4] = new Handle("pWidth", Math.round(homeX+(paperWidth/2)), Math.round(homeY+(paperHeight/2)*1f), 0, 10, handles, true, false, 64);
+        handles[5] = new Handle("pHeight", homeX, Math.round(homeY+(paperHeight)), 0, 10, handles, false, true, 64);
     }
 
     public void mousePressed()
@@ -425,11 +425,11 @@ void initLogging()
         }
         else if(id.equals("pWidth"))
         {
-          paperWidth = (x-homeX)*2/25.4;
+          paperWidth = (x-homeX)*2;
         }
         else if(id.equals("pHeight"))
         {
-          paperHeight = (y-homeY)/25.4;
+          paperHeight = (y-homeY);
         }
     }
 
@@ -693,8 +693,8 @@ void initLogging()
         fill(pageColor);
         stroke(gridColor);
         strokeWeight(0.4f);
-        float pWidth = paperWidth*25.4f;
-        float pHeight = paperHeight*25.4f;
+        float pWidth = paperWidth*1f;
+        float pHeight = paperHeight*1f;
         rect(scaleX(homeX - pHeight / 2), scaleY(homeY), pHeight * zoomScale, pWidth * zoomScale);
         rect(scaleX(homeX - pWidth / 2), scaleY(homeY), pWidth * zoomScale, pHeight * zoomScale);
      //   noFill();
