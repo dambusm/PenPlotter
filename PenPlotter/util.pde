@@ -274,8 +274,6 @@ JFileChooser fc;
                                                flipX = 1;
                                                flipY = 1;
                                                updateScale();
-                                               offX = 0;
-                                               offY = 0;
                                                File file = fc.getSelectedFile();
                                                if (file.getPath().endsWith(".svg"))
                                                {
